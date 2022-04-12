@@ -1,0 +1,9 @@
+services:
+    bolgatty_connector.job.job_parameters.demo_product_update:
+        class: 'BolgattyDemoBundle\JobParameters\DemoProductExport'
+        arguments:
+            - '@pim_catalog.repository.channel'
+            - ['%bolgatty_connector.job.demo_product_update.name%']
+        tags:
+            - { name: akeneo_batch.job.job_parameters.constraint_collection_provider }
+            - { name: akeneo_batch.job.job_parameters.default_values_provider }

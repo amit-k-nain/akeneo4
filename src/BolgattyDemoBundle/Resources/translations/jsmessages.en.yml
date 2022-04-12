@@ -1,0 +1,9 @@
+pim_enrich.form.job_instance.button.export.title: Export now
+pim_enrich.form.job_instance.subsection.last_executions: Last Executions
+pim_enrich.form.job_instance.button.edit.title: Edit
+pim_enrich.form.job_instance.tab.properties.title: Properties
+pim_enrich.form.job_instance.tab.properties.code.title: Code
+pim_enrich.form.job_instance.tab.properties.label.title: Label
+pim_enrich.form.required: (required)
+batch_jobs.demo_product_update.label: Demo Product Update
+pim_enrich.form.job_instance.tab.content.title: Content

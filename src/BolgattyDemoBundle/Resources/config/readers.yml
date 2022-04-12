@@ -1,0 +1,18 @@
+services:
+    bolgatty_connector.reader.csv.product_csv:
+        class: 'BolgattyDemoBundle\Connector\Reader\DemoProductReader'
+        arguments:
+            - '@pim_catalog.query.product_query_builder_factory'
+            - '@pim_catalog.repository.channel'
+            - '@pim_catalog.converter.metric'
+            - '@bolgattydemo.connector.service'
+            - '@pim_catalog.resolver.fqcn'
+
+    bolgatty_connector.reader.csv.product_model_csv:
+        class: 'BolgattyDemoBundle\Connector\Reader\DemoProductReader'
+        arguments:
+            - '@pim_catalog.query.product_model_query_builder_factory'
+            - '@pim_catalog.repository.channel'
+            - '@pim_catalog.converter.metric'
+            - '@bolgattydemo.connector.service'
+            - '@pim_catalog.resolver.fqcn'

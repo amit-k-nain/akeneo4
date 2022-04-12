@@ -1,0 +1,18 @@
+services:
+    # connector service 
+    bolgattydemo.connector.service:
+        class: 'BolgattyDemoBundle\Services\BolgattyDemoConnector'
+        arguments:
+            - '@doctrine.orm.entity_manager'
+            - '@pim_catalog.repository.attribute'
+            - '@pim_catalog.repository.attribute_option'
+            - '@pim_catalog.repository.category'
+            - '@router'
+            - '@liip_imagine.controller'
+            - '@pim_catalog.repository.family_variant'
+            - '@pim_catalog.repository.channel'
+            - '@pim_catalog.repository.product_model'
+            - '@pim_catalog.repository.product'
+            - '@akeneo_file_storage.file_storage.file.file_storer'
+            - '%tmp_storage_dir%'
+            - 'en_US'

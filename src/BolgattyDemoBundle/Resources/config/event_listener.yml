@@ -1,0 +1,8 @@
+services:
+    BolgattyDemoBundle\Listener\ClassDefinationForCompatibility:
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+    demo_product_export_command_event.listener:  
+        class:  'BolgattyDemoBundle\Listener\ClassDefinationForCompatibility'          
+        tags:
+            - { name: kernel.event_listener, event: console.command, method: createUserSystem }

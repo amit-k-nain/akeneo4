@@ -1,0 +1,18 @@
+parameters:
+    bolgatty.connector.name: Bolgatty Demo Connector
+    bolgatty_connector.job.simple_job.class: BolgattyDemoBundle\Job\Job
+    bolgatty_connector.job.demo_product_update.name: demo_product_update
+
+services:
+    bolgatty_connector.job.demo_product_update:
+        class: '%bolgatty_connector.job.simple_job.class%'
+        arguments:
+            - '%bolgatty_connector.job.demo_product_update.name%'
+            - '@event_dispatcher'
+            - '@akeneo_batch.job_repository'
+            -
+                - '@bolgatty_connector.step.demo_product_update.export'
+                - '@bolgatty_connector.step.demo_product_model_update.export'
+            - true
+        tags:
+            - { name: akeneo_batch.job, connector: '%bolgatty.connector.name%', type: '%pim_connector.job.export_type%' }

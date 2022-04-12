@@ -1,0 +1,3 @@
+bolgatty_demo:
+    resource: "@BolgattyDemoBundle/Resources/config/routing.yml"
+    prefix:   /

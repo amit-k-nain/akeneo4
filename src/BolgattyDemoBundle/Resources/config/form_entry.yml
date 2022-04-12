@@ -1,0 +1,9 @@
+services:
+    # Product
+    demo_product_update.provider.form.job_instance.csv:
+        class: '%pim_enrich.provider.form.job_instance.class%'
+        arguments:
+            -
+                demo_product_update: pim-job-instance-demo-product-export
+        tags:
+            - { name: pim_enrich.provider.form }

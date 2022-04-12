@@ -1,0 +1,24 @@
+services:
+    # Product Export Step
+    bolgatty_connector.step.demo_product_update.export:
+        class: '%pim_connector.step.item_step.class%'
+        arguments:
+            - 'demo_product_export'                                          # Export name
+            - '@event_dispatcher'
+            - '@akeneo_batch.job_repository'
+            - '@bolgatty_connector.reader.csv.product_csv'                    # Reader
+            - '@bolgatty_connector.processor.normalization.product'         # Processor
+            - '@bolgatty_connector.writer.product_csv'                        # Writer      
+            - 10
+
+    # Product Model Export Step
+    bolgatty_connector.step.demo_product_model_update.export:
+        class: '%pim_connector.step.item_step.class%'
+        arguments:
+            - 'demo_product_model_export'                                    # Export name
+            - '@event_dispatcher'
+            - '@akeneo_batch.job_repository'
+            - '@bolgatty_connector.reader.csv.product_model_csv'              # Reader
+            - '@bolgatty_connector.processor.normalization.product_model'   # Processor
+            - '@bolgatty_connector.writer.product_csv'                        # Writer
+            - 10
