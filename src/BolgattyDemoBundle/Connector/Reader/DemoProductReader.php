@@ -40,24 +40,34 @@ class DemoProductReader extends ProductReader implements ItemReaderInterface, In
 
     public $connectorService;
 
+    protected $updater;
+
+    protected $saver;
+
     /**
      * @param ProductQueryBuilderFactoryInterface   $pqbFactory
      * @param ChannelRepositoryInterface            $channelRepository
      * @param MetricConverter                       $metricConverter
      * @param BolgattyDemoConnector                 $connectorService
      * @param \FQCNResolver                         $FQCNResolver
+     * @param $updater
+     * @param $saver
      */
     public function __construct(
         ProductQueryBuilderFactoryInterface $pqbFactory,
         ChannelRepositoryInterface $channelRepository,
         MetricConverter $metricConverter,
         BolgattyDemoConnector $connectorService,
-        \FQCNResolver $FQCNResolver
+        \FQCNResolver $FQCNResolver,
+        $updater,
+        $saver
     ) {
         parent::__construct($pqbFactory, $channelRepository, $metricConverter);
-
-        $this->connectorService     = $connectorService;
+        $this->pqbFactory = $pqbFactory;
+        $this->connectorService = $connectorService;
         $this->FQCNResolver = $FQCNResolver;
+        $this->updater = $updater;
+        $this->saver = $saver;
     }
 
     /**
@@ -76,7 +86,7 @@ class DemoProductReader extends ProductReader implements ItemReaderInterface, In
         && $this->parameters->get('user') != "") ? $this->parameters->get('user') : 0;
 
         $this->products = $this->getProductsCursor($filters, $channel);
-        dump($filters, $channel);
+
         $this->firstRead = true;
     }
 
@@ -101,7 +111,7 @@ class DemoProductReader extends ProductReader implements ItemReaderInterface, In
             }
             $this->stepExecution->incrementSummaryInfo('read');
         }
-
+        
         $this->firstRead = false;
 
         return $product;
@@ -109,6 +119,37 @@ class DemoProductReader extends ProductReader implements ItemReaderInterface, In
 
     public function getProdductVersionHistory($product)
     {
+        foreach ($product->getValues() as $key => $value) {
+            $key = explode('-',$key);
+            $attribute = $this->connectorService->getAttributeByCode($key[0] ?? $key[0]);
+            if($attribute->getType() === "pim_catalog_multiselect" || $attribute->getType() === "pim_catalog_simpleselect") {
+                $currentData = $value->getData();
+                $newValue = $this->connectorService->getAttrOptionByAttrCode($attribute->getId());
+                $newValue = $newValue[array_rand($newValue)];
+                if(gettype($currentData) == "array") {
+                    array_push($currentData,$newValue);
+                } else {
+                    $currentData = $newValue;
+                }
+
+                $this->updater->setData($product, $key[0], $currentData, ['locale' => null, 'scope' => null]);
+
+                $this->saver->save($product);
+            }
+        }
+
         return $product;
     }
+
+    function generateRandomString($length = 15) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+
+        return $randomString;
+    }
+    
 }

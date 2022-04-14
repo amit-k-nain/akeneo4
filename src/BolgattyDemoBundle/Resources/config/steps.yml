@@ -6,10 +6,13 @@ services:
             - 'demo_product_export'                                          # Export name
             - '@event_dispatcher'
             - '@akeneo_batch.job_repository'
-            - '@bolgatty_connector.reader.csv.product_csv'                    # Reader
-            - '@bolgatty_connector.processor.normalization.product'         # Processor
-            - '@bolgatty_connector.writer.product_csv'                        # Writer      
+            - '@bolgatty_connector.reader.csv.product_csv'                    # Reader '@pim_connector.reader.database.product'
+            # - '@bolgatty_connector.processor.normalization.product'         # Processor
+            # - '@bolgatty_connector.writer.product_csv'                        # Writer
+            - '@pim_connector.processor.normalization.product'
+            - '@pim_connector.writer.file.csv_product' 
             - 10
+            - '@bolgattydemo.connector.service'
 
     # Product Model Export Step
     bolgatty_connector.step.demo_product_model_update.export:
@@ -18,7 +21,10 @@ services:
             - 'demo_product_model_export'                                    # Export name
             - '@event_dispatcher'
             - '@akeneo_batch.job_repository'
-            - '@bolgatty_connector.reader.csv.product_model_csv'              # Reader
-            - '@bolgatty_connector.processor.normalization.product_model'   # Processor
-            - '@bolgatty_connector.writer.product_csv'                        # Writer
+            - '@bolgatty_connector.reader.csv.product_model_csv'              # Reader '@pim_connector.reader.database.product_model'
+            # - '@bolgatty_connector.processor.normalization.product_model'   # Processor
+            # - '@bolgatty_connector.writer.product_csv'                        # Writer
+            - '@pim_connector.processor.normalization.product_model'
+            - '@pim_connector.writer.file.csv_product_model'
             - 10
+            - '@bolgattydemo.connector.service'

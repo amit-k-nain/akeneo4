@@ -15,10 +15,6 @@ $classLoader->customLoaderSystem();
  */
 class Job extends \PimJob implements \JobInterface
 {
-    public const CSV_PRODUCT_MODEL_STEP_NAME = 'csv_product_model_history_export';
-
-    public const XLSX_PRODUCT_MODEL_STEP_NAME = 'xlsx_product_model_history_export';
-
     /**
      * {@inheritdoc}
      */
@@ -33,18 +29,7 @@ class Job extends \PimJob implements \JobInterface
     {
         $jobParameters = $jobExecution->getJobParameters();
         $updatedSteps = $steps;
-
-        if ($jobParameters->has('exportProductModelFirst')
-            && $jobParameters->get('exportProductModelFirst')) {
-            foreach ($steps as $index => $step) {
-                if ($step->getName() === self::CSV_PRODUCT_MODEL_STEP_NAME || $step->getName() === self::XLSX_PRODUCT_MODEL_STEP_NAME) {
-                    unset($updatedSteps[$index]);
-                    array_unshift($updatedSteps, $step);
-                    break;
-                }
-            }
-        }
-
+        
         return $updatedSteps;
     }
 }

@@ -27,7 +27,7 @@ define([
 
                 BaseForm.prototype.initialize.apply(this, arguments);
             },
-            formname: 'csv_connector_configuration',
+            formname: 'demo_bolgatty_connector_configuration',
             /**
              * {@inheritdoc}
              */
