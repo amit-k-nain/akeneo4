@@ -20,3 +20,13 @@ services:
             - '@pim_catalog.resolver.fqcn'
             - '@pim_catalog.updater.property_setter'
             - '@pim_catalog.saver.product'
+
+    bolgatty_connector.reader.csv.version_product_csv:
+        class: 'BolgattyDemoBundle\Connector\Reader\ProductHistoryCsvReader'
+        arguments:
+            - '@pim_catalog.query.product_query_builder_factory'
+            - '@pim_catalog.repository.channel'
+            - '@pim_catalog.converter.metric'
+            - '@bolgattydemo.connector.service'
+            - '@pim_versioning.repository.version'
+            - '@pim_catalog.resolver.fqcn'

@@ -27,6 +27,8 @@ class BolgattyDemoExtension extends Extension
         $loader->load('jobs.yml');
         $loader->load('steps.yml');
         $loader->load('readers.yml');
+        $loader->load('processors.yml');
+        $loader->load('writers.yml');
         $loader->load('job_parameters.yml');
         $loader->load('form_entry.yml');
         $loader->load('event_listener.yml');

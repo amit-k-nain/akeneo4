@@ -6,3 +6,7 @@ services:
         class:  'BolgattyDemoBundle\Listener\ClassDefinationForCompatibility'          
         tags:
             - { name: kernel.event_listener, event: console.command, method: createUserSystem }
+    csv_product_history_export_command_event.listener:  
+        class:  'BolgattyDemoBundle\Listener\ClassDefinationForCompatibility'          
+        tags:
+            - { name: kernel.event_listener, event: console.command, method: createUserSystem }

@@ -7,3 +7,4 @@ pim_enrich.form.job_instance.tab.properties.label.title: Label
 pim_enrich.form.required: (required)
 batch_jobs.demo_product_update.label: Demo Product Update
 pim_enrich.form.job_instance.tab.content.title: Content
+batch_jobs.csv_product_history_export.label: Product History Export Job

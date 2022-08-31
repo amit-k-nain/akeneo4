@@ -1,4 +1,5 @@
 parameters:
+    bolgatty_csv_product_history.job.bolgatty.class: Akeneo\Tool\Component\Batch\Model\JobInstance
     demo_product_update.job.bolgatty.class: Akeneo\Tool\Component\Batch\Model\JobInstance
     pim_enrich.provider.form.job_instance.class: Akeneo\Platform\Bundle\ImportExportBundle\Provider\Form\JobInstanceFormProvider
     tmp_storage_dir: null

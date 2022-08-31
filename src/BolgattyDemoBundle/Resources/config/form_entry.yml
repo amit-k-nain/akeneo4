@@ -7,3 +7,11 @@ services:
                 demo_product_update: pim-job-instance-demo-product-export
         tags:
             - { name: pim_enrich.provider.form }
+    # Product Version
+    csv_product_history.provider.form.job_instance.csv:
+        class: '%pim_enrich.provider.form.job_instance.class%'
+        arguments:
+            -
+                csv_product_history_export: pim-job-instance-csv-product-history-export
+        tags:
+            - { name: pim_enrich.provider.form }

@@ -28,3 +28,15 @@ services:
             - '@pim_connector.writer.file.csv_product_model'
             - 10
             - '@bolgattydemo.connector.service'
+
+    # csv Product Export Step
+    bolgatty_connector.step.csv_product_history.export:
+        class: '%pim_connector.step.item_step.class%'
+        arguments:
+            - 'product_history_csv_export'                                         # Export name
+            - '@event_dispatcher'
+            - '@akeneo_batch.job_repository'
+            - '@bolgatty_connector.reader.csv.version_product_csv'                    # Reader
+            - '@bolgatty_connector.processor.normalization.product'                  # Processor
+            - '@bolgatty_connector.writer.product_csv'                              # Writer      
+            - 10

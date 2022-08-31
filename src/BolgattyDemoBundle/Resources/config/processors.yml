@@ -1,0 +1,12 @@
+parameters:
+    bolgatty_connector.processor.normalization.product.class: BolgattyDemoBundle\Connector\Processor\ProductHistoryCsvProcessor
+
+services:  
+    bolgatty_connector.processor.normalization.product:
+        class: '%bolgatty_connector.processor.normalization.product.class%'
+        arguments:
+            - '@pim_catalog.normalizer.standard.product'
+            - '@pim_catalog.repository.channel'
+            - '@pim_catalog.repository.attribute'
+            - '@pim_connector.processor.bulk_media_fetcher'
+            - '@pim_catalog.product_model.fill_missing_values'

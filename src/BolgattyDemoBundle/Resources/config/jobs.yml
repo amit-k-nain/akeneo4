@@ -2,6 +2,8 @@ parameters:
     bolgatty.connector.name: Bolgatty Demo Connector
     bolgatty_connector.job.simple_job.class: BolgattyDemoBundle\Job\Job
     bolgatty_connector.job.demo_product_update.name: demo_product_update
+    bolgatty_connector.job.version_job.class: BolgattyDemoBundle\Job\Version\Job
+    bolgatty_connector.job.product_history_csv_export.name: csv_product_history_export
 
 services:
     bolgatty_connector.job.demo_product_update:
@@ -13,6 +15,19 @@ services:
             -
                 - '@bolgatty_connector.step.demo_product_update.export'
                 - '@bolgatty_connector.step.demo_product_model_update.export'
+            - true
+        tags:
+            - { name: akeneo_batch.job, connector: '%bolgatty.connector.name%', type: '%pim_connector.job.export_type%' }
+    
+    bolgatty_connector.job.product_history_csv_export:
+        class: '%bolgatty_connector.job.version_job.class%'
+        arguments:
+            - '%bolgatty_connector.job.product_history_csv_export.name%'
+            - '@event_dispatcher'
+            - '@akeneo_batch.job_repository'
+            -
+                - '@bolgatty_connector.step.csv_product_history.export'
+                # - '@bolgatty_connector.step.csv_product_model_history.export'
             - true
         tags:
             - { name: akeneo_batch.job, connector: '%bolgatty.connector.name%', type: '%pim_connector.job.export_type%' }

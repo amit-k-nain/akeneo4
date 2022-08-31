@@ -29,6 +29,7 @@ class BolgattyDemoConnector
     private $categoryLabels = [];
     protected $uploadDir;
     protected $storer;
+    protected $users;
     public $locale = 'en_US';
 
     public function __construct(
@@ -44,6 +45,7 @@ class BolgattyDemoConnector
         $product,
         $storer,
         $uploadDir,
+        $users,
         $locale
     ) {
         $this->em = $em;
@@ -58,6 +60,7 @@ class BolgattyDemoConnector
         $this->product = $product;
         $this->storer = $storer;
         $this->uploadDir = !empty($uploadDir) ? $uploadDir : sys_get_temp_dir();
+        $this->users = $users;
         $this->locale = $locale;
     }
 
@@ -151,5 +154,17 @@ class BolgattyDemoConnector
         $result = $this->attribute->getIdentifier()->getCode();
 
         return $result;
+    }
+
+    // get all system users
+    public function getAllUsers()
+    {
+        return $this->users->indexAction();
+    }
+
+    // get user by username
+    public function getUserByUserName($username)
+    {
+        return $this->users->getUserByUserNameAction($username);
     }
 }
